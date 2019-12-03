@@ -5,38 +5,45 @@ import { BaseEntity, Notification, Store, AuthenticationProvider } from './';
 @Entity()
 export class User extends BaseEntity {
 
-  @PrimaryColumn()
+  constructor() {
+    super();
+  }
+
+  @Column()
   email: string;
 
-  @Column({ type: 'varchar', length: 300 })
+  @Column()
+  password: string;
+
+  @Column({ type: 'varchar', length: 300, nullable: true })
   firstName: string;
 
-  @Column({ type: 'varchar', length: 300 })
+  @Column({ type: 'varchar', length: 300, nullable: true })
   lastName: string;
 
-  @Column()
+  @Column({nullable: true})
   avatar: string;
 
-  @Column()
+  @Column({nullable: true})
   phoneNumber: string;
 
-  @Column()
+  @Column({nullable: true})
   address: string;
 
-  @Column()
+  @Column({nullable: true})
   notificationToken: string;
 
-  @Column()
+  @Column({nullable: true})
   platForm: string;
 
   @Column({ type: 'boolean', default: false })
   isStore: boolean;
 
-  @OneToOne(type => AuthenticationProvider)
+  @OneToOne(type => AuthenticationProvider, { nullable: true })
   @JoinColumn()
   provider: AuthenticationProvider;
 
-  @OneToOne(type => Store)
+  @OneToOne(type => Store, { nullable: true })
   @JoinColumn()
   store: Store;
 

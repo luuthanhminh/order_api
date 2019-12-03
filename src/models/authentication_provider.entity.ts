@@ -5,10 +5,10 @@ import { BaseEntity } from './base.entity';
 @Entity()
 export class AuthenticationProvider extends BaseEntity {
 
-  @Column()
+  @Column({nullable: true})
   providerKey: string;
 
-  @Column()
+  @Column({nullable: true})
   providerType: string;
 
 }

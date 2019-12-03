@@ -6,10 +6,10 @@ import { User } from './user.entity';
 @Entity()
 export class Notification extends BaseEntity {
 
-  @Column()
+  @Column({nullable: true})
   title: string;
 
-  @Column()
+  @Column({nullable: true})
   message: string;
 
   @ManyToOne(type => User, user => user.notifications)

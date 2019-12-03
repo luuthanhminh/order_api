@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsController } from './controllers/cats/cats.controller';
@@ -6,6 +6,11 @@ import { CatsService } from './controllers/cats/cats.service';
 import { Contact } from './models/contact.entity';
 import { User, Category, Food, Notification, Store } from './models';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserController } from './controllers/user/user.controller';
+import { UserService } from './controllers/user/user.service';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './middlewares/jwt.strategy';
 
 @Module({
   imports: [
@@ -15,8 +20,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [__dirname + '/models/*.entity{.ts,.js}'],
       synchronize: true,
  }),
-    TypeOrmModule.forFeature([Contact, User, Category, Food, Notification, Store])],
-  controllers: [AppController, CatsController],
-  providers: [AppService, CatsService],
+    TypeOrmModule.forFeature([Contact, User, Category, Food, Notification, Store]),
+    PassportModule,
+    JwtModule.register({
+      secret: 'mystrongsecretkey',
+      signOptions: { expiresIn: '3600s' },
+    })],
+  controllers: [AppController, CatsController, UserController],
+  providers: [AppService, CatsService, UserService, JwtStrategy],
 })
-export class AppModule {}
+export class AppModule {
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer
+  //   .apply(AppMiddleware)
+  //   .forRoutes({ path: '*', method: RequestMethod.ALL });
+  // }
+}

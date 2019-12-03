@@ -9,10 +9,10 @@ export class Category extends BaseEntity {
   @PrimaryColumn()
   name: string;
 
-  @Column()
+  @Column({nullable: true})
   description: string;
 
-  @Column()
+  @Column({nullable: true})
   imageUrl: string;
 
   @OneToMany(type => Food, food => food.category)

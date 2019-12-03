@@ -10,13 +10,13 @@ export class Food extends BaseEntity {
   @Column()
   name: string;
 
-  @Column()
+  @Column({nullable: true})
   description: string;
 
   @Column({ type: 'bigint' })
   price: Long;
 
-  @Column()
+  @Column({nullable: true})
   imageUrl: string;
 
   @ManyToOne(type => Category, category => category.foods)
