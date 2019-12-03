@@ -32,7 +32,7 @@ export class UserService {
       }
     async register(username: string, pass: string): Promise<BaseResponse> {
         let user = await this.repo.findOne({email: username});
-        if (!user) {
+        if (user) {
             return new BaseResponse(null, 'email already exists.', HttpStatus.BAD_REQUEST);
         }
         user = new User();
