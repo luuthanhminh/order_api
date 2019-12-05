@@ -13,8 +13,8 @@ export class UserController extends BaseController {
 
     @Post('login')
     async login(@Body() model: LoginBindingModel, @Res() res: Response) {
-        setTimeout( async () => {this.handleResult(res, await this.userService.login(model.email, model.password)); } , 10000);
-        // this.handleResult(res, await this.userService.login(model.email, model.password));
+        //setTimeout( async () => {this.handleResult(res, await this.userService.login(model.email, model.password)); } , 10000);
+        this.handleResult(res, await this.userService.login(model.email, model.password));
     }
 
     @Post('register')
