@@ -1,8 +1,6 @@
 import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CatsController } from './controllers/cats/cats.controller';
-import { CatsService } from './controllers/cats/cats.service';
 import { Contact } from './models/contact.entity';
 import { User, Category, Food, Notification, Store } from './models';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -26,8 +24,8 @@ import { JwtStrategy } from './middlewares/jwt.strategy';
       secret: 'mystrongsecretkey',
       signOptions: { expiresIn: '3600s' },
     })],
-  controllers: [AppController, CatsController, UserController],
-  providers: [AppService, CatsService, UserService, JwtStrategy],
+  controllers: [AppController, UserController],
+  providers: [AppService, UserService, JwtStrategy],
 })
 export class AppModule {
   // configure(consumer: MiddlewareConsumer) {
