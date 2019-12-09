@@ -25,4 +25,12 @@ export class HomeController extends BaseController {
     async getDashboard(@Res() res: Response) {
         this.handleResult(res, await this.homeService.getHomeInfo());
     }
+
+    @UseGuards(AuthGuard('jwt'))
+    @Get('categories/:categoryId')
+    @ApiBearerAuth()
+    @ApiParam({ name: 'categoryId'})
+    async getCategoryInfo(@Param() params, @Res() res: Response) {
+        this.handleResult(res, await this.homeService.getCategoryInfo(params.categoryId));
+    }
 }

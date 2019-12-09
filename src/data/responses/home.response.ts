@@ -7,6 +7,11 @@ export class HomeResponseModel {
     categories: CategoryResponseModel[];
     foods: FoodResponse[];
 }
+// tslint:disable-next-line:max-classes-per-file
+export class CategoryInfoResponseModel {
+    restaurants: Restaurant[];
+    foods: FoodResponse[];
+}
 
 // tslint:disable-next-line:max-classes-per-file
 export class Promotion {
@@ -16,6 +21,23 @@ export class Promotion {
     name: string;
     deliveryId: number;
     code: string;
+    cuisines: string;
+}
+// tslint:disable-next-line:max-classes-per-file
+export class PromotionInfo {
+    text: string;
+    image: string;
+}
+
+// tslint:disable-next-line:max-classes-per-file
+export class Restaurant {
+    promotions: PromotionInfo[];
+    image: string;
+    address: string;
+    name: string;
+    deliveryId: number;
+    priceRange: string;
+    cuisines: string;
 }
 // tslint:disable-next-line:max-classes-per-file
 export class FoodResponse {
@@ -24,4 +46,7 @@ export class FoodResponse {
     image: string;
     name: string;
     price: Price;
+    restaurantName: string;
+    restaurantCuisines: string;
+    restaurantImage: string;
 }

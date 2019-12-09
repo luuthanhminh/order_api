@@ -1,12 +1,12 @@
 export const Appconstants = {
     secret: 'secretKey',
-    searchUrl: 'https://gappapi.deliverynow.vn/api/delivery/search_global',
     getInfoUrl: 'https://gappapi.deliverynow.vn/api/delivery/get_infos',
     getBrowsingIds: 'https://gappapi.deliverynow.vn/api/delivery/get_browsing_ids',
     getBrowsingInfos: 'https://gappapi.deliverynow.vn/api/delivery/get_browsing_infos',
     getPromotionIds: 'https://gappapi.deliverynow.vn/api/promotion/get_ids',
     getPromotionInfos: 'https://gappapi.deliverynow.vn/api/promotion/get_infos',
     getMenus: 'https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?id_type=2&request_id=',
+    searchGlobal: 'https://gappapi.deliverynow.vn/api/delivery/search_global',
     headers: {
         'origin': 'https://www.now.vn',
         'x-foody-client-type': '1',
