@@ -1,4 +1,4 @@
-import { Module, NestModule, MiddlewareConsumer, RequestMethod } from '@nestjs/common';
+import { Module, NestModule, MiddlewareConsumer, RequestMethod, HttpModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Contact } from './models/contact.entity';
@@ -9,6 +9,8 @@ import { UserService } from './controllers/user/user.service';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './middlewares/jwt.strategy';
+import { HomeController } from './controllers/home/home/home.controller';
+import { HomeService } from './controllers/home/home/home.service';
 
 @Module({
   imports: [
@@ -23,9 +25,10 @@ import { JwtStrategy } from './middlewares/jwt.strategy';
     JwtModule.register({
       secret: 'mystrongsecretkey',
       signOptions: { expiresIn: '3600s' },
-    })],
-  controllers: [AppController, UserController],
-  providers: [AppService, UserService, JwtStrategy],
+    }), HttpModule,
+  ],
+  controllers: [AppController, UserController, HomeController],
+  providers: [AppService, UserService, JwtStrategy, HomeService],
 })
 export class AppModule {
   // configure(consumer: MiddlewareConsumer) {

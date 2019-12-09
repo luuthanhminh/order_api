@@ -10,6 +10,7 @@ async function bootstrap() {
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
 
   const options = new DocumentBuilder()
+  .addBearerAuth()
   .setTitle('Order')
   .setDescription('The order API description')
   .setVersion('1.0')

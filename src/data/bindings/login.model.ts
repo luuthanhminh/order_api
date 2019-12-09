@@ -2,7 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class LoginBindingModel {
 
-    @ApiProperty()
+    @ApiProperty({
+        type: String,
+        format: 'email',
+    })
     email: string;
 
     @ApiProperty()

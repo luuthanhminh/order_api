@@ -9,8 +9,17 @@ export class Store extends BaseEntity {
   @Column()
   name: string;
 
+  @Column()
+  deliveryId: number;
+
   @Column({nullable: true})
   description: string;
+
+  @Column({nullable: true})
+  address: string;
+
+  @Column({nullable: true})
+  photos: string;
 
   @Column({nullable: true})
   imageUrl: string;
