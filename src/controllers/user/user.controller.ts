@@ -4,8 +4,9 @@ import { Response } from 'express';
 import { BaseController } from '../base.contrller';
 import { LoginBindingModel } from '../../data/bindings/login.model';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBearerAuth, ApiCreatedResponse, ApiParam } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiCreatedResponse, ApiParam, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User')
 @Controller('api/user')
 export class UserController extends BaseController {
     constructor(private userService: UserService) {

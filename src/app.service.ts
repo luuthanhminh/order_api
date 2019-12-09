@@ -19,7 +19,7 @@ export class AppService {
   ) { }
 
   getHello(): string {
-    return 'Hello World!';
+    return 'Running...';
   }
   async initDb(): Promise<boolean> {
     const config: AxiosRequestConfig = {

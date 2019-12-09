@@ -1,12 +1,14 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('/api/initdb')
+@ApiTags('App')
+@Controller('/api/ping')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  async getHello(): Promise<boolean> {
-    return this.appService.initDb();
+  async getHello(): Promise<string> {
+    return this.appService.getHello();
   }
 }
