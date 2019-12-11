@@ -16,13 +16,13 @@ export class HomeService {
 
     async getCategories(): Promise<BaseResponse> {
         const categories: CategoryResponseModel[] = [];
-        Appconstants.categories.forEach(c => {
-            categories.push({
-                category: c.name,
-                id: c.id,
-                url: c.url,
-            } as CategoryResponseModel);
-        });
+        // Appconstants.categories.forEach(c => {
+        //     categories.push({
+        //         category: c.name,
+        //         id: c.id,
+        //         url: c.url,
+        //     } as CategoryResponseModel);
+        // });
         return new BaseResponse(categories);
     }
 
