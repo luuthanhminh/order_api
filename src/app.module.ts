@@ -11,6 +11,8 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './middlewares/jwt.strategy';
 import { HomeController } from './controllers/home/home/home.controller';
 import { HomeService } from './controllers/home/home/home.service';
+import { NotificationController } from './controllers/notification/notification/notification.controller';
+import { NotificationService } from './controllers/notification/notification/notification.service';
 
 @Module({
   imports: [
@@ -27,8 +29,8 @@ import { HomeService } from './controllers/home/home/home.service';
       signOptions: { expiresIn: '3600s' },
     }), HttpModule,
   ],
-  controllers: [AppController, UserController, HomeController],
-  providers: [AppService, UserService, JwtStrategy, HomeService],
+  controllers: [AppController, UserController, HomeController, NotificationController],
+  providers: [AppService, UserService, JwtStrategy, HomeService, NotificationService],
 })
 export class AppModule {
   // configure(consumer: MiddlewareConsumer) {

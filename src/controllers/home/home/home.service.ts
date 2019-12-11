@@ -54,7 +54,7 @@ export class HomeService {
                         name: val.restaurant_info.name,
                         deliveryId: val.restaurant_info.delivery_id,
                         code: val.code,
-                        image: (val.restaurant_info.photos as any[])[1].value,
+                        image: (val.restaurant_info.photos as any[])[8].value,
                         cuisines: (val.restaurant_info.cuisines as any[]).join(' & '),
                     } as Promotion));
                 }),
@@ -81,7 +81,7 @@ export class HomeService {
                 restaurants = (x.data.reply.delivery_infos as any[]).map( val => ({
                     delivery_id: val.delivery_id,
                     restaurantName: val.name,
-                    restaurantImage: val.photos[1].value,
+                    restaurantImage: val.photos[5].value,
                     restaurantCuisines: (val.cuisines as []).join(' & '),
                 }));
                 resultData.foods = [];
@@ -99,7 +99,7 @@ export class HomeService {
                             id: food.id,
                             description: food.description,
                             price: food.price as Price,
-                            image: food.photos[1].value,
+                            image: food.photos[2].value,
                             restaurantName: restaurant.restaurantName,
                             restaurantImage: restaurant.restaurantImage,
                             restaurantCuisines: restaurant.restaurantCuisines,
@@ -108,7 +108,14 @@ export class HomeService {
                 );
             }),
         );
-        return await result.toPromise().then( () => new BaseResponse(resultData));
+        return await result.toPromise().then( () => {
+            resultData.categories = Appconstants.categories.map(c => ({
+                id: c.id,
+                category: c.name,
+                url: c.url,
+            } as CategoryResponseModel));
+            return new BaseResponse(resultData);
+        });
     }
 
     async getCategoryInfo(catId: number): Promise<BaseResponse> {
@@ -149,7 +156,7 @@ export class HomeService {
                             name: val.name,
                             deliveryId: val.delivery_id,
                             priceRange: '~' + val.price_range.resource_args[0],
-                            image: (val.photos as any[])[1].value,
+                            image: (val.photos as any[])[8].value,
                             cuisines: (val.cuisines as any[]).join(' & '),
                         } as Restaurant));
                     }),
@@ -173,7 +180,7 @@ export class HomeService {
                 restaurants = (x.data.reply.delivery_infos as any[]).map( val => ({
                     delivery_id: val.delivery_id,
                     restaurantName: val.name,
-                    restaurantImage: val.photos[1].value,
+                    restaurantImage: val.photos[5].value,
                     restaurantCuisines: (val.cuisines as []).join(' & '),
                 }));
                 resultData.foods = [];
@@ -191,7 +198,7 @@ export class HomeService {
                             id: food.id,
                             description: food.description,
                             price: food.price as Price,
-                            image: food.photos[1].value,
+                            image: food.photos[2].value,
                             restaurantName: restaurant.restaurantName,
                             restaurantImage: restaurant.restaurantImage,
                             restaurantCuisines: restaurant.restaurantCuisines,
