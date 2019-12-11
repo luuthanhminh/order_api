@@ -26,7 +26,7 @@ import { NotificationService } from './controllers/notification/notification/not
     PassportModule,
     JwtModule.register({
       secret: 'mystrongsecretkey',
-      signOptions: { expiresIn: '3600s' },
+      signOptions: { expiresIn: '604800s' },
     }), HttpModule,
   ],
   controllers: [AppController, UserController, HomeController, NotificationController],
