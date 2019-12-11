@@ -110,10 +110,10 @@ export class HomeService {
         );
         return await result.toPromise().then( () => {
             resultData.categories = Appconstants.categories.map(c => ({
-                id: c.id,
+                id: c.id.toString(),
                 category: c.name,
                 url: c.url,
-            } as CategoryResponseModel));
+            }) as CategoryResponseModel);
             return new BaseResponse(resultData);
         });
     }

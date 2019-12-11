@@ -1,7 +1,7 @@
 
 export class CategoryResponseModel {
 
-    id: number;
+    id: string;
 
     category: string;
 
