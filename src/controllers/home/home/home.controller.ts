@@ -30,7 +30,7 @@ export class HomeController extends BaseController {
     @Get('categories/:categoryId')
     @ApiBearerAuth()
     @ApiParam({ name: 'categoryId'})
-    async getCategoryInfo(@Param() params, @Res() res: Response) {
-        this.handleResult(res, await this.homeService.getCategoryInfo(params.categoryId));
+    async getCategoryInfo(@Param('categoryId') categoryId: string, @Res() res: Response) {
+        this.handleResult(res, await this.homeService.getCategoryInfo(categoryId));
     }
 }

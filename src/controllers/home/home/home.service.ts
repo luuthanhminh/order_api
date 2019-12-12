@@ -118,17 +118,20 @@ export class HomeService {
         });
     }
 
-    async getCategoryInfo(catId: number): Promise<BaseResponse> {
+    async getCategoryInfo(catId: string): Promise<BaseResponse> {
         const config: AxiosRequestConfig = {
             headers: Appconstants.headers,
         };
-
+        const selectedCategory = Appconstants.categories.filter(c => c.id.toString() === catId);
+        if (selectedCategory.length === 0) {
+            return new BaseResponse(null, 'Category not found', 404);
+        }
         const resultData = new CategoryInfoResponseModel();
         let restaurants = [];
         const body = {
             category_group: 1,
             city_id: 217,
-            combine_categories: Appconstants.categories.find(c => c.id = catId).subCategories.map(val => ({
+            combine_categories: selectedCategory[0].subCategories.map(val => ({
                 code: 1,
                 id: val,
             })),
