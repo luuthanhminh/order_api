@@ -74,6 +74,8 @@ export class UserService {
         }
         const result: any = {};
         result.name = user.lastName + ' ' + user.firstName;
+        result.firstName = user.firstName;
+        result.lastName = user.lastName;
         result.email = user.email;
         result.avatar = user.avatar;
         result.phone = user.phoneNumber;
@@ -103,6 +105,8 @@ export class UserService {
 
         const result: any = {};
         result.name = user.lastName + ' ' + user.firstName;
+        result.firstName = user.firstName;
+        result.lastName = user.lastName;
         result.email = user.email;
         result.avatar = user.avatar;
         result.phone = user.phoneNumber;
