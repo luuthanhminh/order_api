@@ -212,4 +212,67 @@ export class HomeService {
         );
         return await result.toPromise().then( () => new BaseResponse(resultData));
     }
+
+    async search(key: string): Promise<BaseResponse> {
+        const config: AxiosRequestConfig = {
+            headers: Appconstants.headers,
+        };
+
+        const body = {
+            category_group: 1,
+            city_id: 217,
+            delivery_only: true,
+            foody_services: [1],
+            full_restaurant_ids: true,
+            keyword: key,
+            sort_type: 8,
+        };
+        const resultData = new CategoryInfoResponseModel();
+        const result = this.httpService.post(Appconstants.searchGlobal, body, config).pipe(
+            map((x) => {
+                return {
+                    restaurant_ids: x.data.reply.search_result[0].restaurant_ids.slice(0, 20),
+                };
+            }),
+            mergeMap((x) => {
+                return this.httpService.post(Appconstants.getInfoUrl, x, config).pipe(
+                    map((it) => {
+                        resultData.restaurants = (it.data.reply.delivery_infos as any[]).map( val => ({
+                            promotions: (val.promotion_groups as any[]).map( p => ({
+                                text: p.text,
+                                image: p.icon,
+                            }) as PromotionInfo),
+                            address: val.address,
+                            name: val.name,
+                            deliveryId: val.delivery_id,
+                            priceRange: '~' + val.price_range.resource_args[0],
+                            image: (val.photos as any[])[8].value,
+                            cuisines: (val.cuisines as any[]).join(' & '),
+                        } as Restaurant));
+                    }),
+                );
+            }),
+        );
+        return await result.toPromise().then( () => new BaseResponse(resultData.restaurants));
+    }
+
+    async getMenus(deliveryId: string): Promise<BaseResponse> {
+        const config: AxiosRequestConfig = {
+            headers: Appconstants.headers,
+        };
+
+        const resultData = new CategoryInfoResponseModel();
+        const result = this.httpService.get(Appconstants.getMenus + deliveryId, config).pipe(
+            map((it) => {
+                resultData.foods = (it.data.reply.menu_infos[0].dishes as any[]).map(f => ({
+                    name: f.name,
+                    id: f.id,
+                    description: f.description,
+                    price: f.price as Price,
+                    image: f.photos[2].value,
+                } as FoodResponse));
+            }),
+        );
+        return await result.toPromise().then( () => new BaseResponse(resultData.foods));
+    }
 }
